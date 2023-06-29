@@ -1,8 +1,10 @@
 import Vue from 'vue';
 import { Icon } from '@iconify/vue2';
 // import NetEaseCloudView from '@/views/NetEaseCloud.vue';
-import App from './App.vue'
+import App from './App.vue';
+import Drawer from './components/Drawer.vue';
 Vue.component('Icon', Icon);
+Vue.component('Drawer', Drawer);
 // vm就是根实例  root 具备el
 // 但是其他实例不具备
 // 组件的嵌套 A组件出现在B组件的template中 A是B的子组件

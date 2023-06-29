@@ -1,10 +1,12 @@
 <template>
-    <div >
+    <div>
         <NetEaseCloud/>
     </div>
 </template>
 <script>
-import NetEaseCloud from './views/NetEaseCloud.vue';
+import NetEaseCloud from './HomeView/NetEaseCloud.vue';
+
+
 export default { 
     components:{NetEaseCloud},
     data(){
