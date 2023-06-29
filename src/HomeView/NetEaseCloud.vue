@@ -19,7 +19,7 @@
       <Recommendations class="w-[200vw] mt-[3.68vw] h-[11.74vw] scroll-content flex" :menulist="menulist"/>
     </div>
     <!-- 推荐歌单 -->
-    <div class="mt-[4.58vw] ml-[3.82vw]">
+    <div  @click="drawerVisible = !drawerVisible" @自定义事件="(e) => (drawerVisible = e)" class="mt-[4.58vw] ml-[3.82vw]">
       <Heet :song="song"/>
     </div>
     <!-- 新歌新碟 -->
@@ -27,11 +27,11 @@
         <Newsong :newsong="newsong"/>
     </div>
     <!-- 排行榜 -->
-    <div class="mt-[5vw] ml-[3.82vw]">
+    <div class="mt-[5vw] ml-[3.82vw]"  @click="drawerVisible = !drawerVisible" @自定义事件="(e) => (drawerVisible = e)">
         <Ranking class="" :thecharts="thecharts"/>
     </div>
     <!-- 音乐日历 -->
-    <div class="ml-[3.82vw] mt-[5vw]">
+    <div class="ml-[3.82vw] mt-[5vw]" @click="drawerVisible = !drawerVisible" @自定义事件="(e) => (drawerVisible = e)">
       <div class="flex items-center justify-between">
         <div class="flex items-center">
           <h1>音乐日历</h1>
@@ -53,7 +53,7 @@
     </div>
     <!-- 抽屉 -->
     <Drawer :visible.sync="drawerVisible" direction="btt" width="100vw">
-      <p class=" m-[3vw] leading-normal border-b-[1px] w-[85%] border-[#ccc]">推荐歌单</p>
+      <p class=" m-[3vw] leading-normal border-b-[1px] w-[85%] border-[#ccc]">推荐</p>
                 <div class="w-[96%] h-[30vw] pl-[4vw]">
                     <div class="flex items-center h-[10vw]">
                         <Icon icon="iconamoon:like-light" />

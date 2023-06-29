@@ -11,7 +11,7 @@
    </div>
    <div class=" overflow-hidden scroll-wrapper" ref="scroll_3" >
         <div class="w-[550vw] flex scroll-content">
-          <div class="mt-[4.5vw] ml-[8px]"  v-for="item in rankings" :key="item.id">
+          <div class="mt-[4.5vw] ml-[8px]"  v-for="item in thecharts" :key="item.id">
           <div class="w-[90vw] h-[53.47vw] bg-[#fff] rounded-[6px]" >
             <div class="justify-between flex">
               <div class="ml-[4.3vw] text-[14px] mt-[4.1vw]">{{item.uiElement.mainTitle.title}}</div>
@@ -43,7 +43,7 @@ import Swiper from 'swiper';
 import 'swiper/swiper-bundle.css';
 import BScroll from '@better-scroll/core';
 export default{
-    props:['rankings'],
+    props:['thecharts'],
     mounted(){
         this.init(this.$refs.scroll),
             this.init(this.$refs.scroll_1),
