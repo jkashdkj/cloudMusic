@@ -9,9 +9,8 @@
        <div class="swiper-pagination" style=" margin-left: -22vw; "></div>
     </div>
     </div>
-
+<!--  -->
 </template>
-
 <script>
 export default{
     props:['banners'],
