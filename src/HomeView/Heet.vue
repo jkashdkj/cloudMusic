@@ -1,24 +1,39 @@
 <template>
-
-<div>
-   <div class="flex items-center justify-between">
-         <div class="flex items-center">
-             <h1>推荐歌单</h1>
-             <Icon icon="mingcute:right-line" color="#4f5a6e" />
-           </div>
-           <div class="mr-[4vw]" @click="drawerVisible = !drawerVisible" @自定义事件="(e) => (drawerVisible = e)">
-             <Icon icon="solar:menu-dots-bold" color="#9097a2" :rotate="1" />
-           </div>
-         </div>
-         <div class="overflow-hidden scroll-wrapper" ref="scroll_1">
-           <div class=" mt-[4.24vw] flex w-[220vw] scroll-content">
-             <div class="mr-[5vw] w-[31.81vw] h-[41.25vw] flex flex-wrap items-center justify-around" v-for="item in song" :key="item.id">
-               <img :src=item.uiElement.image.imageUrl alt="" class="w-[31.81vw] h-[30.88vw] rounded-[10px]">
-               <p class="text-[12px] text-[#707a86]">{{item.uiElement.mainTitle.title}}</p>
+     <!-- 数据 -->
+     <div class=" w-[98vw] overflow-hidden scroll-wrapper  mt-[1vw] ml-[2vw]" ref="scroll_5"> 
+        <div class="flex w-[200vw] h-[40vw] scroll-content mt-[3vw] ml-[2vw]">
+         <div class="w-[31vw] h-[31vw]  mr-[2vw] ">
+           <div class="w-[31vw] h-[31vw]  overflow-hidden relative rounded-[3vw]">
+             <div class="absolute top-[4%] right-[8%] font-[800] text-[#fff] dark:text-[#000] flex items-center z-30">
+               <Icon icon="ion:infinite-outline" class="text-[#fff] dark:text-[#000] w-[6vw] h-[6vw]"/>
              </div>
+             <transition name="abc" v-for="(item, index) in bannerPic" :key="item.id">
+               <div v-if="visible === index" class="absolute top-0 left-0&quot;" >
+                 <img :src="item.uiElement.image.imageUrl" alt="" class="w-[30vw] h-[30vw] rounded-[4vw]" />
+               </div>
+             </transition>
            </div>
+           <p class="dark:text-[#fff] text-[1vw] truncate">
+             热门歌单 {{ resourceData }}
+           </p>
          </div>
-  </div>
+         <div  v-for="item in personalized" :key="item.id" class="w-[32vw] h-[40vw] text-[1vw] mr-[2vw] relative">
+           <div class="text-white flex items-center absolute top-[1vw] right-0">
+             <Icon icon="iconoir:play" color="white" class="text-[3vw]" />
+             <span>{{
+               item.resources[0].resourceExtInfo.playCount > 10000
+                 ? Math.floor(
+                     item.resources[0].resourceExtInfo.playCount / 10000
+                   ) + '万'
+                 : item.resources[0].resourceExtInfo.playCount
+             }}</span>
+           </div>
+           <Icon icon="iconoir:play"  color="white" class="text-[5vw] absolute bottom-[11vw] right-[10px]" />
+           <img :src="item.uiElement.image.imageUrl" class="w-[32vw] h-[30vw] rounded-[3vw]"/>
+           <p class="dark:text-[#fff]">{{ item.uiElement.mainTitle.title }}</p>
+          </div>
+        </div>
+     </div>
 
 </template>
    
@@ -26,21 +41,23 @@
    import Swiper from 'swiper';
    import 'swiper/swiper-bundle.css';
    import BScroll from '@better-scroll/core';
+   import Drawer from '../components/Drawer.vue';
    export default{
+    comments:{Drawer},
      data(){
        return {
-           drawerVisible: false,
-           visible: true,
-       }
+          visible: 0,
+          drawerVisible1: false,
+          visible: true,
+          bannerPic: [],
+          personalized:[],
+       } 
      },
-       props:['song'],
+       props:['personalized','bannerPic','resourceData'],
        mounted(){
-           this.init(this.$refs.scroll),
-               this.init(this.$refs.scroll_1),
-               this.init(this.$refs.scroll_2),
-               this.init(this.$refs.scroll_3),
-               this.init(this.$refs.scroll_4),
-               new Swiper(".swiper-container", {
+              this.init(this.$refs.scroll_5)
+              this.animateItems(),
+              new Swiper(".swiper-container", {
                    autoplay: {
                        delay: 3000,
                        disableOnInteraction: false // 用户交互时是否停止自动播放，默认为true
@@ -57,7 +74,41 @@
                    probeType: 3,
                    click: true
                });
-           }
-       }
-   }
+           },
+           animateItems() {
+            setInterval(() => {
+              this.visible++;
+              if (this.visible === this.bannerPic.length) {
+                this.visible = 0;
+              }
+              this.resourceData =
+                this.bannerPic[this.visible].uiElement.mainTitle.title;
+            }, 3000);
+          },
+      }
+  }
    </script>
+
+<style scoped>
+.abc-enter{
+  opacity: 0;
+  transform: translateY(100%) scale(.7);
+}
+.abc-enter-active{
+  transition: all ease-in-out 1s;
+}
+.abc-enter-to{
+  opacity: 1;
+  transform: translateY(0%) scale(1);
+}
+
+.abc-leave{
+  transform: translateY(0) scale(1);
+}
+.abc-leave-active{
+  transition: all ease-in-out 1s;
+}
+.abc-leave-to{
+  transform: translateY(-100%) scale(.7);
+}
+</style>

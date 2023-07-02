@@ -1,14 +1,4 @@
 <template>
-    <div>
-      <div class="flex items-center justify-between ml-[3.82vw] mt-[8vw]">
-        <div class="flex items-center">
-          <h1>新歌新碟\数字专辑</h1>
-          <Icon icon="mingcute:right-line" color="#4f5a6e" />
-        </div>
-        <div class="mr-[4vw]" @click="drawerVisible = !drawerVisible" @自定义事件="(e) => (drawerVisible = e)">
-          <Icon icon="solar:menu-dots-bold" color="#9097a2" :rotate="1" />
-        </div>
-    </div>
     <div class="overflow-hidden scroll-wrapper  ml-[3.82vw]   mt-[3.74vw]" ref="scroll_2">
       <div class=" scroll-content w-[700vw] flex">
         <ul class="" v-for="item in newsong" :key="item.id">
@@ -22,7 +12,6 @@
       </ul>
       </div>
     </div>
-    </div>
 </template>
 
 <script>
@@ -30,13 +19,14 @@ import Swiper from 'swiper';
 import 'swiper/swiper-bundle.css';
 import BScroll from '@better-scroll/core';
 export default{
+  data(){
+    return {
+      drawerVisible:false
+    }
+  },
     props:['newsong'],
     mounted(){
-        this.init(this.$refs.scroll),
-            this.init(this.$refs.scroll_1),
             this.init(this.$refs.scroll_2),
-            this.init(this.$refs.scroll_3),
-            this.init(this.$refs.scroll_4),
             new Swiper(".swiper-container", {
                 autoplay: {
                     delay: 3000,

@@ -3,16 +3,8 @@
     <transition :name="direction">
       <div
         v-show="visible"
-        class=" h-[220px] bg-white  z-[999] fixed"
+        class=" h-[220px] bg-white  z-[999] fixed  overflow-auto"
         :style="[drawerContentStyle, { width }]">
-        <div>
-          <slot name="header">
-            <div class="flex justify-between items-center">
-              <p>{{ title }}</p>
-              <Icon @click.native="closeDrawer" icon="clarity:times-line" />
-            </div>
-          </slot>
-        </div>
         <div>
           <slot></slot>
         </div>
@@ -104,6 +96,36 @@ export default {
 }
 .btt-enter-to,
 .btt-leave {
+  transform: translateY(0);
+}
+
+.ltr-enter,.ltr-leave-to{
+  transform: translateX(-100%);
+}
+.ltr-enter-active,.ltr-leave-active{
+  transition: all ease-in-out 0.5s;
+}
+.ltr-enter-to,.ltr-leave{
+  transform: translateX(0);
+
+}
+.rtl-enter,.rtl-leave-to{
+  transform: translateX(100%);
+}
+.rtl-enter-active,.rtl-leave-active{
+  transition: all ease-in-out 0.5s;
+}
+.rtl-enter-to,.rtl-leave{
+  transform: translateX(0);
+}
+
+.ttb-enter,.ttb-leave-to{
+  transform: translateY(-100%);
+}
+.ttb-enter-active,.ttb-leave-active{
+  transition: all ease-in-out 0.5s;
+}
+.ttb-enter-to,.ttb-leave{
   transform: translateY(0);
 }
 </style>

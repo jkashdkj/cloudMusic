@@ -3,8 +3,11 @@ import { Icon } from '@iconify/vue2';
 // import NetEaseCloudView from '@/views/NetEaseCloud.vue';
 import App from './App.vue';
 import Drawer from './components/Drawer.vue';
+import Switch from './components/Switch.vue'
 Vue.component('Icon', Icon);
 Vue.component('Drawer', Drawer);
+Vue.component('v-Switch', Switch);
+
 // vm就是根实例  root 具备el
 // 但是其他实例不具备
 // 组件的嵌套 A组件出现在B组件的template中 A是B的子组件
@@ -25,9 +28,13 @@ Vue.component('Drawer', Drawer);
 // vue中this的指向问题：methods中所有函数(不要箭头函数)的this指向vm(vue的实例)
 
 const vm = new Vue({
+   
     el: '#app', // 指令是出现在模板中
     components:{App},
     // template: template_index,
+    data:{
+        swiper:null
+    },
     template:'<App/>',
     // render: (h) => h(NetEaseCloudView),
     // 实例已经创建 但是实例上的模板还没有渲染
